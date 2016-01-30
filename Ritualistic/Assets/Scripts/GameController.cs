@@ -21,4 +21,11 @@ public class GameController : MonoBehaviour {
         }
 
     }
+
+    public void GameOver() {
+        /**
+         *  Perform game over clean up here
+         */
+        GameManager.GetInstance().Active = false;
+    }
 }
