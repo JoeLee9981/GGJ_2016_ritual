@@ -15,16 +15,17 @@ public class MonsterController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (GameManager.GetInstance().Active) {
+            if (!CanSeePlayer()) {
+                if (Vector3.Distance(transform.position, Waypoints[currentWaypoint].position) < .1) {
+                    CycleWaypoint();
+                }
 
-        if(!CanSeePlayer()) { 
-            if (Vector3.Distance(transform.position, Waypoints[currentWaypoint].position) < .1) {
-                CycleWaypoint();
+                transform.position += GetDirectionVector(transform.position, Waypoints[currentWaypoint].position) * Speed;
             }
-
-            transform.position += GetDirectionVector(transform.position, Waypoints[currentWaypoint].position) * Speed;
-        }
-        else {
-            transform.position += GetDirectionVector(transform.position, GameController.GetInstance().ActivePlayer.transform.position) * Speed;
+            else {
+                transform.position += GetDirectionVector(transform.position, GameManager.GetInstance().ActivePlayer.transform.position) * Speed;
+            }
         }
     }
 
