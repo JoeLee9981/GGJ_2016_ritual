@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum Ritual
-{
+public enum Ritual {
     NONE,
     EARTH,
     AIR,
@@ -11,8 +10,7 @@ public enum Ritual
     METAL,
 };
 
-public class PlayerController : MonoBehaviour
-{
+public class PlayerController : MonoBehaviour {
     public float Speed;
     public float TurnSpeed;
     public Vector3 Direction;
@@ -20,29 +18,24 @@ public class PlayerController : MonoBehaviour
     public Ritual ActiveForm;
 
     // Use this for initialization
-    void Start()
-    {
+    void Start() {
         ActiveRitual = Ritual.NONE;
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         Direction.x = Input.GetAxis("Horizontal");
         Direction.z = Input.GetAxis("Vertical");
         transform.position += Direction * Speed;
 
-        if (Input.GetButtonDown("Ritual"))
-        {
+        if (Input.GetButtonDown("Ritual")) {
             UpdateMesh();
         }
-        if (Input.GetButtonDown("Rotate"))
-        {
+        if (Input.GetButtonDown("Rotate")) {
             RotateRitual();
         }
     }
-    void FixedUpdate()
-    {
+    void FixedUpdate() {
         // Generate a plane that intersects the transform's position with an upwards normal.
         Plane playerPlane = new Plane(Vector3.up, transform.position);
 
@@ -56,8 +49,7 @@ public class PlayerController : MonoBehaviour
         //   to look at.
         float hitdist = 0.0f;
         // If the ray is parallel to the plane, Raycast will return false.
-        if (playerPlane.Raycast(ray, out hitdist))
-        {
+        if (playerPlane.Raycast(ray, out hitdist)) {
             // Get the point along the ray that hits the calculated distance.
             Vector3 targetPoint = ray.GetPoint(hitdist);
 
@@ -69,12 +61,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void UpdateMesh()
-    {
-        
+    private void UpdateMesh() {
+
         Debug.Log("You have pressed R");
-        switch(ActiveRitual)
-        {
+        switch (ActiveRitual) {
             case Ritual.AIR:
                 GameController.GetInstance().ActivePlayer.GetComponent<Renderer>().material.color = Color.magenta;
                 break;
@@ -96,11 +86,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void RotateRitual()
-    {
+    private void RotateRitual() {
         ActiveRitual++;
-        if(ActiveRitual > Ritual.METAL)
-        {
+        if (ActiveRitual > Ritual.METAL) {
             ActiveRitual = 0;
         }
     }
