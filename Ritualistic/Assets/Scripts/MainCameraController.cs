@@ -3,8 +3,6 @@ using System.Collections;
 
 public class MainCameraController : MonoBehaviour {
     private PlayerController player;
-    private GameObject mainFloor;
-
     public Vector3 Offset;
 
     // Use this for initialization
@@ -13,7 +11,6 @@ public class MainCameraController : MonoBehaviour {
         if (playerObject != null) {
             player = playerObject.GetComponent<PlayerController>();
         }
-        mainFloor = GameManager.GetInstance().MainFloor;
     }
 
     // Update is called once per frame
@@ -24,9 +21,6 @@ public class MainCameraController : MonoBehaviour {
     void LateUpdate() {
         if (GameManager.GetInstance().Active) {
             transform.position = player.transform.position + Offset;
-            if (transform.position.x < mainFloor.transform.position.x) {
-                //setPositionX(mainFloor.transform.position.x - 10);
-            }
         }
     }
 

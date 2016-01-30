@@ -66,7 +66,7 @@ public class MonsterController : MonoBehaviour
             {
                 playerCollisionDetected = true;
             }
-            if (hit.collider.gameObject.CompareTag("Wall"))
+            if (hit.collider.gameObject.CompareTag("Walls"))
             {
                 collisionDetected = true;
                 transform.Rotate(Vector3.up * Time.deltaTime * rotationSpeed);
@@ -81,7 +81,7 @@ public class MonsterController : MonoBehaviour
             {
                 playerCollisionDetected = true;
             }
-            if (hit.collider.gameObject.CompareTag("Wall"))
+            if (hit.collider.gameObject.CompareTag("Walls"))
             {
                 collisionDetected = false;
             }

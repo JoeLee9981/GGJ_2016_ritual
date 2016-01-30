@@ -13,15 +13,6 @@ public class GameManager {
         }
     }
 
-    private GameObject _mainFloor;
-    public GameObject MainFloor {
-        get {
-            if (_mainFloor == null)
-                _mainFloor = GameObject.FindGameObjectWithTag("MainFloor");
-            return _mainFloor;
-        }
-    }
-
     public bool Active;
 
     public static GameManager GetInstance() {
