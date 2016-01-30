@@ -42,6 +42,7 @@ public class EnemyCharacter : Character {
         Damage = GameProperties.AIR_DAMAGE;
         SpeedBonus = GameProperties.AIR_SPEED;
         Health = MaxHealth;
+        CharacterMesh = GameProperties.AIR_MESH;
     }
 
     private void SetupMetal() {
@@ -50,6 +51,7 @@ public class EnemyCharacter : Character {
         Damage = GameProperties.METAL_DAMAGE;
         AttackSpeedBonus = GameProperties.METAL_ATTACK_SPEED;
         Health = MaxHealth;
+        CharacterMesh = GameProperties.METAL_MESH;
     }
 
     private void SetupBoss() {
@@ -57,6 +59,7 @@ public class EnemyCharacter : Character {
         Armor = GameProperties.BOSS_ARMOR;
         Damage = GameProperties.BOSS_DAMAGE;
         Health = MaxHealth;
+        CharacterMesh = GameProperties.BOSS_MESH;
     }
 
     private void SetupFire() {
@@ -64,6 +67,7 @@ public class EnemyCharacter : Character {
         Armor = GameProperties.FIRE_ARMOR;
         Damage = GameProperties.FIRE_DAMAGE;
         Health = MaxHealth;
+        CharacterMesh = GameProperties.FIRE_MESH;
     }
 
     private void SetupEarth() {
@@ -71,6 +75,7 @@ public class EnemyCharacter : Character {
         Armor = GameProperties.EARTH_ARMOR;
         Damage = GameProperties.EARTH_DAMAGE;
         Health = MaxHealth;
+        CharacterMesh = GameProperties.EARTH_MESH;
     }
 
     private void SetupWater() {
@@ -78,6 +83,7 @@ public class EnemyCharacter : Character {
         Armor = GameProperties.WATER_ARMOR;
         Damage = GameProperties.WATER_DAMAGE;
         Health = MaxHealth;
+        CharacterMesh = GameProperties.WATER_MESH;
     }
 
     private void SetupEnemey() {
@@ -85,5 +91,6 @@ public class EnemyCharacter : Character {
         Armor = GameProperties.ENEMY_ARMOR;
         Damage = GameProperties.ENEMY_DAMAGE;
         Health = MaxHealth;
+        CharacterMesh = GameProperties.ENEMY_MESH;
     }
 }

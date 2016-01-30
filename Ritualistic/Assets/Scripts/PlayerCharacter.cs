@@ -8,5 +8,6 @@ public class PlayerCharacter : Character {
         Armor = GameProperties.PLAYER_DEFAULT_ARMOR;
         Damage = GameProperties.PLAYER_DEFAULT_DAMAGE;
         Health = MaxHealth;
+        CharacterMesh = GameProperties.PLAYER_MESH;
     }
 }

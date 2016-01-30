@@ -3,8 +3,6 @@ using System.Collections;
 
 public class MonsterController : MonoBehaviour
 {
-
-    public float Speed;
     public Vector3 Direction;
     public Transform[] Waypoints;
     private int currentWaypoint;
@@ -23,7 +21,8 @@ public class MonsterController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        enemyCharacter = CharacterFactory.GetCharacter(characterType);
+        enemyCharacter = CharacterFactory.GetEnemyCharacter(characterType);
+        GetComponent<Renderer>().material.color = enemyCharacter.CharacterMesh;
         currentWaypoint = 0;
         range = 80;
         rotationSpeed = 15f;
@@ -41,12 +40,12 @@ public class MonsterController : MonoBehaviour
                     CycleWaypoint();
                 }
 
-                transform.position += GetDirectionVector(transform.position, Waypoints[currentWaypoint].position) * Speed * Time.deltaTime;
+                transform.position += GetDirectionVector(transform.position, Waypoints[currentWaypoint].position) * enemyCharacter.MovementSpeed * Time.deltaTime;
             }
             else {
                 if (Vector3.Distance(transform.position, GameManager.GetInstance().ActivePlayer.transform.position) < 7f)
                 {
-                    transform.position += GetDirectionVector(transform.position, GameManager.GetInstance().ActivePlayer.transform.position) * Speed * Time.deltaTime;
+                    transform.position += GetDirectionVector(transform.position, GameManager.GetInstance().ActivePlayer.transform.position) * enemyCharacter.MovementSpeed * Time.deltaTime;
                 }
                 else {
                     playerCollisionDetected = false;

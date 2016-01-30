@@ -11,7 +11,6 @@ public enum Ritual {
 };
 
 public class PlayerController : MonoBehaviour {
-    public float Speed;
     public float TurnSpeed;
     public Vector3 Direction;
     public Ritual ActiveRitual;
@@ -60,7 +59,7 @@ public class PlayerController : MonoBehaviour {
             }
 
             if (Direction.x != 0 || Direction.z != 0) {
-                transform.position += Direction.normalized * Speed * Time.deltaTime;
+                transform.position += Direction.normalized * playerCharacter.MovementSpeed * Time.deltaTime;
             }
 
             if (Input.GetButtonDown("Ritual")) {

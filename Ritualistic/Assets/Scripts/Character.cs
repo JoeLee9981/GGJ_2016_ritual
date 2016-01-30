@@ -47,6 +47,9 @@ public abstract class Character {
 
     public float SpeedBonus = GameProperties.DEFAULT_MOVEMENT_BONUS;
 
+    //TODO Change this to switch out mesh
+    public Color CharacterMesh;
+
     //returns true if character is dead
     public bool IsDead() {
         return Health <= 0;
