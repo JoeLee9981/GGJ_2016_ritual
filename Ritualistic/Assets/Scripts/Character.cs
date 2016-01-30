@@ -20,7 +20,17 @@ public abstract class Character {
         }
     }
 
-    public float Armor;
+    private float armor;
+    public float Armor {
+        get {
+            return Armor * (1 + ArmorBonus);
+        }
+        set {
+            armor = value;
+        }
+    }
+    public float ArmorBonus;
+
     public float Damage;
 
     public float AttackSpeedBonus = GameProperties.DEFAULT_ATTACK_BONUS;

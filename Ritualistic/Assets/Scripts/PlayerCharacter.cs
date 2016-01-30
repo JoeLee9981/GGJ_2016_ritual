@@ -1,13 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerCharacter : Character {
 
-    CharacterType characterType;
+    public CharacterType characterType;
+    protected List<Item> Inventory;
 
     public PlayerCharacter(CharacterType characterType) {
         this.characterType = characterType;
         SetupCharacter();
+        Inventory = new List<Item>();
     }
 
     private void SetupCharacter() {
@@ -81,5 +84,46 @@ public class PlayerCharacter : Character {
         Damage = GameProperties.WATER_DAMAGE;
         Health = MaxHealth;
         CharacterMesh = GameProperties.WATER_MESH;
+    }
+
+    public void AddToInventory(Item item) {
+        Inventory.Add(item);
+    }
+
+    public void RemoveFromInventory(Item item) {
+        Inventory.Remove(item);
+        item.OnRemove(this);
+    }
+
+    public bool InventoryContains(Item item) {
+        return Inventory.Contains(item);
+    }
+
+    public bool InventoryContains(string ItemName) {
+        foreach(Item item in Inventory) {
+            if(item.ItemName.Equals(ItemName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public bool HasKey(SpecialKey key) {
+        foreach(Item item in Inventory) {
+            if(item is KeyItem) {
+                KeyItem keyItem = item as KeyItem;
+                if(keyItem.KeyType == key) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public void ClearInventory() {
+        foreach(Item item in Inventory) {
+            item.OnRemove(this);
+        }
+        Inventory.Clear();
     }
 }
