@@ -1,26 +1,45 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum Ritual
+{
+    NONE,
+    EARTH,
+    AIR,
+    FIRE,
+    WATER,
+    METAL,
+};
+
 public class PlayerController : MonoBehaviour
 {
-
-    public float speed;
-    public float turnspeed;
-    private Vector3 direction;
-    
+    public float Speed;
+    public float TurnSpeed;
+    public Vector3 Direction;
+    public Ritual ActiveRitual;
+    public Ritual ActiveForm;
 
     // Use this for initialization
     void Start()
     {
-
+        ActiveRitual = Ritual.NONE;
     }
 
     // Update is called once per frame
     void Update()
     {
-        direction.x = Input.GetAxis("Horizontal");
-        direction.z = Input.GetAxis("Vertical");
-        transform.position += direction * speed;
+        Direction.x = Input.GetAxis("Horizontal");
+        Direction.z = Input.GetAxis("Vertical");
+        transform.position += Direction * Speed;
+
+        if (Input.GetButtonDown("Ritual"))
+        {
+            UpdateMesh();
+        }
+        if (Input.GetButtonDown("Rotate"))
+        {
+            RotateRitual();
+        }
     }
     void FixedUpdate()
     {
@@ -46,7 +65,43 @@ public class PlayerController : MonoBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(targetPoint - transform.position);
 
             // Smoothly rotate towards the target point.
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, turnspeed * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, TurnSpeed * Time.deltaTime);
+        }
+    }
+
+    private void UpdateMesh()
+    {
+        
+        Debug.Log("You have pressed R");
+        switch(ActiveRitual)
+        {
+            case Ritual.AIR:
+                GameController.GetInstance().ActivePlayer.GetComponent<Renderer>().material.color = Color.magenta;
+                break;
+            case Ritual.EARTH:
+                GameController.GetInstance().ActivePlayer.GetComponent<Renderer>().material.color = Color.green;
+                break;
+            case Ritual.FIRE:
+                GameController.GetInstance().ActivePlayer.GetComponent<Renderer>().material.color = Color.yellow;
+                break;
+            case Ritual.METAL:
+                GameController.GetInstance().ActivePlayer.GetComponent<Renderer>().material.color = Color.grey;
+                break;
+            case Ritual.WATER:
+                GameController.GetInstance().ActivePlayer.GetComponent<Renderer>().material.color = Color.blue;
+                break;
+            default:
+                GameController.GetInstance().ActivePlayer.GetComponent<Renderer>().material.color = Color.red;
+                break;
+        }
+    }
+
+    private void RotateRitual()
+    {
+        ActiveRitual++;
+        if(ActiveRitual > Ritual.METAL)
+        {
+            ActiveRitual = 0;
         }
     }
 }
