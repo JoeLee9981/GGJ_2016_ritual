@@ -14,6 +14,7 @@ public class GameManager {
     }
 
     public bool Active;
+    public bool Dead;
 
     public static GameManager GetInstance() {
         if (gameController == null) {

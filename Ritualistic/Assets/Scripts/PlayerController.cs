@@ -41,13 +41,18 @@ public class PlayerController : MonoBehaviour {
             }
             Direction.x = Input.GetAxis("Horizontal");
             Direction.z = Input.GetAxis("Vertical");
-            transform.position += Direction * Speed;
+            
+            transform.position += (Direction / Direction.magnitude) * Speed;
 
             if (Input.GetButtonDown("Ritual")) {
                 UpdateMesh();
             }
             if (Input.GetButtonDown("Rotate")) {
                 RotateRitual();
+            }
+
+            if(transform.position.y < -30) {
+                playerCharacter.Health = 0;
             }
         }
     }
@@ -110,5 +115,12 @@ public class PlayerController : MonoBehaviour {
         if (ActiveRitual > Ritual.METAL) {
             ActiveRitual = 0;
         }
+    }
+
+    public void ResetPlayer() {
+        transform.position = GameProperties.GetDefaultPlayerVector();
+        playerCharacter.Health = GameProperties.PLAYER_DEFAULT_HEALTH;
+        playerCharacter.Armor = GameProperties.PLAYER_DEFAULT_ARMOR;
+        playerCharacter.Damage = GameProperties.PLAYER_DEFAULT_DAMAGE;
     }
 }
