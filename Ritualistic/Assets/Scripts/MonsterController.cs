@@ -37,12 +37,12 @@ public class MonsterController : MonoBehaviour
                     CycleWaypoint();
                 }
 
-                transform.position += GetDirectionVector(transform.position, Waypoints[currentWaypoint].position) * Speed;
+                transform.position += GetDirectionVector(transform.position, Waypoints[currentWaypoint].position) * Speed * Time.deltaTime;
             }
             else {
                 if (Vector3.Distance(transform.position, GameManager.GetInstance().ActivePlayer.transform.position) < 7f)
                 {
-                    transform.position += GetDirectionVector(transform.position, GameManager.GetInstance().ActivePlayer.transform.position) * Speed;
+                    transform.position += GetDirectionVector(transform.position, GameManager.GetInstance().ActivePlayer.transform.position) * Speed * Time.deltaTime;
                 }
                 else {
                     playerCollisionDetected = false;

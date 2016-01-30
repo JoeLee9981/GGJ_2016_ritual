@@ -20,14 +20,17 @@ public class PlayerController : MonoBehaviour {
     public PlayerCharacter playerCharacter;
 
     private GameController controller;
-    
+
+    private bool XDown;
+    private bool YDown;
+
 
     // Use this for initialization
     void Start() {
         playerCharacter = new PlayerCharacter();
         ActiveRitual = Ritual.NONE;
         GameObject gameObj = GameObject.FindGameObjectWithTag("GameController");
-        if(gameObj != null) {
+        if (gameObj != null) {
             controller = gameObj.GetComponent<GameController>();
         }
     }
@@ -35,14 +38,34 @@ public class PlayerController : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
-        if(GameManager.GetInstance().Active) { 
-            if(playerCharacter.IsDead()) {
+        if (GameManager.GetInstance().Active) {
+            if (playerCharacter.IsDead()) {
                 controller.GameOver();
             }
-            Direction.x = Input.GetAxis("Horizontal");
-            Direction.z = Input.GetAxis("Vertical");
-            
-            transform.position += (Direction / Direction.magnitude) * Speed;
+
+            if (Input.GetKey("d")) {
+                Direction.x = 1;
+            }
+            else if (Input.GetKey("a")) {
+                Direction.x = -1;
+            }
+            else {
+                Direction.x = 0;
+            }
+
+            if (Input.GetKey("w")) {
+                Direction.z = 1;
+            }
+            else if (Input.GetKey("s")) {
+                Direction.z = -1;
+            }
+            else {
+                Direction.z = 0;
+            }
+
+            if (Direction.x != 0 || Direction.z != 0) {
+                transform.position += Direction.normalized * Speed * Time.deltaTime;
+            }
 
             if (Input.GetButtonDown("Ritual")) {
                 UpdateMesh();
@@ -51,7 +74,7 @@ public class PlayerController : MonoBehaviour {
                 RotateRitual();
             }
 
-            if(transform.position.y < -30) {
+            if (transform.position.y < -30) {
                 playerCharacter.Health = 0;
             }
         }
