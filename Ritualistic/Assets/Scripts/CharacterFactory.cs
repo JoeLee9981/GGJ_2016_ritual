@@ -18,7 +18,7 @@ public static class CharacterFactory {
         return character;
     }
 
-    public static Character GetPlayerCharacter(CharacterType character) {
-        return null;
+    public static Character GetPlayerCharacter(CharacterType characterType) {
+        return new PlayerCharacter(characterType);
     }
 }

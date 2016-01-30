@@ -17,12 +17,14 @@ public class PlayerController : MonoBehaviour {
     public Ritual ActiveForm;
     //container class for player character stats and behavior
     public PlayerCharacter playerCharacter;
+    public Character activeCharacter;
 
     private GameController controller;
 
     // Use this for initialization
     void Start() {
-        playerCharacter = new PlayerCharacter();
+        playerCharacter = CharacterFactory.GetPlayerCharacter(CharacterType.PLAYER) as PlayerCharacter;
+        activeCharacter = playerCharacter;
         ActiveRitual = Ritual.NONE;
         GameObject gameObj = GameObject.FindGameObjectWithTag("GameController");
         if (gameObj != null) {
@@ -105,27 +107,27 @@ public class PlayerController : MonoBehaviour {
 
     private void UpdateMesh() {
 
-        Debug.Log("You have pressed R");
         switch (ActiveRitual) {
             case Ritual.AIR:
-                GameManager.GetInstance().ActivePlayer.GetComponent<Renderer>().material.color = Color.magenta;
+                activeCharacter = CharacterFactory.GetPlayerCharacter(CharacterType.AIR_DEMON);
                 break;
             case Ritual.EARTH:
-                GameManager.GetInstance().ActivePlayer.GetComponent<Renderer>().material.color = Color.green;
+                activeCharacter = CharacterFactory.GetPlayerCharacter(CharacterType.EARTH_DEMON);
                 break;
             case Ritual.FIRE:
-                GameManager.GetInstance().ActivePlayer.GetComponent<Renderer>().material.color = Color.yellow;
+                activeCharacter = CharacterFactory.GetPlayerCharacter(CharacterType.FIRE_DEMON);
                 break;
             case Ritual.METAL:
-                GameManager.GetInstance().ActivePlayer.GetComponent<Renderer>().material.color = Color.grey;
+                activeCharacter = CharacterFactory.GetPlayerCharacter(CharacterType.METAL_DEMON);
                 break;
             case Ritual.WATER:
-                GameManager.GetInstance().ActivePlayer.GetComponent<Renderer>().material.color = Color.blue;
+                activeCharacter = CharacterFactory.GetPlayerCharacter(CharacterType.WATER_DEMON);
                 break;
             default:
-                GameManager.GetInstance().ActivePlayer.GetComponent<Renderer>().material.color = Color.red;
+                activeCharacter = playerCharacter;
                 break;
         }
+        GameManager.GetInstance().ActivePlayer.GetComponent<Renderer>().material.color = activeCharacter.CharacterMesh;
     }
 
     private void RotateRitual() {
