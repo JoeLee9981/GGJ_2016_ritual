@@ -16,16 +16,29 @@ public class PlayerController : MonoBehaviour {
     public Vector3 Direction;
     public Ritual ActiveRitual;
     public Ritual ActiveForm;
+    //container class for player character stats and behavior
+    public PlayerCharacter playerCharacter;
+
+    private GameController controller;
+    
 
     // Use this for initialization
     void Start() {
+        playerCharacter = new PlayerCharacter();
         ActiveRitual = Ritual.NONE;
+        GameObject gameObj = GameObject.FindGameObjectWithTag("GameController");
+        if(gameObj != null) {
+            controller = gameObj.GetComponent<GameController>();
+        }
     }
 
     // Update is called once per frame
     void Update() {
 
         if(GameManager.GetInstance().Active) { 
+            if(playerCharacter.IsDead()) {
+                controller.GameOver();
+            }
             Direction.x = Input.GetAxis("Horizontal");
             Direction.z = Input.GetAxis("Vertical");
             transform.position += Direction * Speed;
