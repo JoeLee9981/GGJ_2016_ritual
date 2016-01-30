@@ -21,10 +21,6 @@ public class PlayerController : MonoBehaviour {
 
     private GameController controller;
 
-    private bool XDown;
-    private bool YDown;
-
-
     // Use this for initialization
     void Start() {
         playerCharacter = new PlayerCharacter();

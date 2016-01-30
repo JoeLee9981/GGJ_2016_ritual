@@ -17,9 +17,13 @@ public class MonsterController : MonoBehaviour
     private float rotationSpeed;
     public GameObject target;
 
+    public CharacterType characterType;
+    private Character enemyCharacter;
+
     // Use this for initialization
     void Start()
     {
+        enemyCharacter = CharacterFactory.GetCharacter(characterType);
         currentWaypoint = 0;
         range = 80;
         rotationSpeed = 15f;
