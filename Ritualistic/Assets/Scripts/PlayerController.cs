@@ -166,6 +166,7 @@ public class PlayerController : MonoBehaviour {
 	void OnGUI()
 	{
 		GUI.Label(new Rect(100,100,500,500), "HP:  " + activeCharacter.Health);
+		GUI.Label(new Rect(100,200,500,500),  "Ritual:  " + playerCharacter.GetRitualForm().ToString());
 
 	}
 }

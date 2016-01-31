@@ -19,6 +19,7 @@ public class PlayerCharacter : Character {
         ActiveRituals = new List<Ritual>();
         //add no rituals to list of available
         AddRitual(Ritual.NONE);
+
     }
 
     private void SetupCharacter() {
@@ -155,6 +156,7 @@ public class PlayerCharacter : Character {
     public Ritual GetRitualForm() {
         return ActiveRituals[selectedRitual];
     }
+
 
 
 }
