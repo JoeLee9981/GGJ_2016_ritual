@@ -11,8 +11,8 @@ public class PlayerAnimationController : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-
-        if (Input.GetKey("space"))
+        
+        if (Input.GetKey("space") || Input.GetKey("mouse 0"))
         {
             GetComponent<Animation>().Play("Attack");
         }
