@@ -50,6 +50,7 @@ public class GameController : MonoBehaviour {
          *  Perform game over clean up here
          */
         PauseGame();
+        GameObject gameOverCanvas = GameObject.FindGameObjectWithTag("game_over");
         manager.Dead = true;
     }
 }
