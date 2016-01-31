@@ -6,11 +6,19 @@ public class PlayerCharacter : Character {
 
     public CharacterType characterType;
     protected List<Item> Inventory;
+    protected List<Ritual> ActiveRituals;
+    private int selectedRitual;
+
 
     public PlayerCharacter(CharacterType characterType) {
         this.characterType = characterType;
         SetupCharacter();
         Inventory = new List<Item>();
+        //set the ritual
+        selectedRitual = 0;
+        ActiveRituals = new List<Ritual>();
+        //add no rituals to list of available
+        AddRitual(Ritual.NONE);
     }
 
     private void SetupCharacter() {
@@ -125,5 +133,26 @@ public class PlayerCharacter : Character {
             item.OnRemove(this);
         }
         Inventory.Clear();
+    }
+
+    public void AddRitual(Ritual ritual) {
+        if (!ActiveRituals.Contains(ritual)) {
+            ActiveRituals.Add(ritual);
+        }
+    }
+
+    public void ClearRituals() {
+        ActiveRituals.Clear();
+    }
+
+    public void RotateRitual() {
+        selectedRitual++;
+        if (selectedRitual >= ActiveRituals.Count) {
+            selectedRitual = 0;
+        }
+    }
+
+    public Ritual GetRitualForm() {
+        return ActiveRituals[selectedRitual];
     }
 }

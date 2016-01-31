@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public abstract class Character {
+
+    protected Action<PlayerCharacter> OnDeathAction;
 
     public float MaxHealth;
 
@@ -65,9 +68,12 @@ public abstract class Character {
         return Health <= 0;
     }
 
-    public bool DealDamage(float damageAmt) {
+    public bool DealDamage(float damageAmt, PlayerCharacter player) {
         health -= damageAmt - (damageAmt * Armor);
 
+        if(OnDeathAction != null) {
+            OnDeathAction(player);
+        }
         return IsDead();
     }
 }

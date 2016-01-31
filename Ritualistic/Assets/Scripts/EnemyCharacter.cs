@@ -43,6 +43,7 @@ public class EnemyCharacter : Character {
         SpeedBonus = GameProperties.AIR_SPEED;
         Health = MaxHealth;
         CharacterMesh = GameProperties.AIR_MESH;
+        OnDeathAction += OnDeath;
     }
 
     private void SetupMetal() {
@@ -52,6 +53,7 @@ public class EnemyCharacter : Character {
         AttackSpeedBonus = GameProperties.METAL_ATTACK_SPEED;
         Health = MaxHealth;
         CharacterMesh = GameProperties.METAL_MESH;
+        OnDeathAction += OnDeath;
     }
 
     private void SetupBoss() {
@@ -68,6 +70,7 @@ public class EnemyCharacter : Character {
         Damage = GameProperties.FIRE_DAMAGE;
         Health = MaxHealth;
         CharacterMesh = GameProperties.FIRE_MESH;
+        OnDeathAction += OnDeath;
     }
 
     private void SetupEarth() {
@@ -76,6 +79,7 @@ public class EnemyCharacter : Character {
         Damage = GameProperties.EARTH_DAMAGE;
         Health = MaxHealth;
         CharacterMesh = GameProperties.EARTH_MESH;
+        OnDeathAction += OnDeath;
     }
 
     private void SetupWater() {
@@ -84,6 +88,7 @@ public class EnemyCharacter : Character {
         Damage = GameProperties.WATER_DAMAGE;
         Health = MaxHealth;
         CharacterMesh = GameProperties.WATER_MESH;
+        OnDeathAction += OnDeath;
     }
 
     private void SetupEnemey() {
@@ -92,5 +97,23 @@ public class EnemyCharacter : Character {
         Damage = GameProperties.ENEMY_DAMAGE;
         Health = MaxHealth;
         CharacterMesh = GameProperties.ENEMY_MESH;
+    }
+
+    public void OnDeath(PlayerCharacter player) {
+        if (characterType == CharacterType.AIR_DEMON) {
+            player.AddRitual(Ritual.AIR);
+        }
+        else if (characterType == CharacterType.EARTH_DEMON) {
+            player.AddRitual(Ritual.EARTH);
+        }
+        else if(characterType == CharacterType.FIRE_DEMON) {
+            player.AddRitual(Ritual.FIRE);
+        }
+        else if (characterType == CharacterType.METAL_DEMON) {
+            player.AddRitual(Ritual.METAL);
+        }
+        else if (characterType == CharacterType.WATER_DEMON) {
+            player.AddRitual(Ritual.WATER);
+        }
     }
 }

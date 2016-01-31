@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public enum Ritual {
     NONE,
@@ -13,8 +14,7 @@ public enum Ritual {
 public class PlayerController : MonoBehaviour {
     public float TurnSpeed;
     public Vector3 Direction;
-    public Ritual ActiveRitual;
-    public Ritual ActiveForm;
+
     //container class for player character stats and behavior
     public PlayerCharacter playerCharacter;
     public Character activeCharacter;
@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour {
     void Start() {
         playerCharacter = CharacterFactory.GetPlayerCharacter(CharacterType.PLAYER) as PlayerCharacter;
         activeCharacter = playerCharacter;
-        ActiveRitual = Ritual.NONE;
+        
         GameObject gameObj = GameObject.FindGameObjectWithTag("GameController");
         if (gameObj != null) {
             controller = gameObj.GetComponent<GameController>();
@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour {
                 UpdateMesh();
             }
             if (Input.GetButtonDown("Rotate")) {
-                RotateRitual();
+                playerCharacter.RotateRitual();
             }
 
             if (transform.position.y < -30) {
@@ -107,7 +107,7 @@ public class PlayerController : MonoBehaviour {
 
     private void UpdateMesh() {
 
-        switch (ActiveRitual) {
+        switch (playerCharacter.GetRitualForm()) {
             case Ritual.AIR:
                 activeCharacter = CharacterFactory.GetPlayerCharacter(CharacterType.AIR_DEMON);
                 break;
@@ -130,17 +130,11 @@ public class PlayerController : MonoBehaviour {
         GameManager.GetInstance().ActivePlayer.GetComponent<Renderer>().material.color = activeCharacter.CharacterMesh;
     }
 
-    private void RotateRitual() {
-        ActiveRitual++;
-        if (ActiveRitual > Ritual.METAL) {
-            ActiveRitual = 0;
-        }
-    }
-
     public void ResetPlayer() {
         transform.position = GameProperties.GetDefaultPlayerVector();
         playerCharacter.Health = GameProperties.PLAYER_DEFAULT_HEALTH;
         playerCharacter.Armor = GameProperties.PLAYER_DEFAULT_ARMOR;
         playerCharacter.Damage = GameProperties.PLAYER_DEFAULT_DAMAGE;
     }
+
 }
