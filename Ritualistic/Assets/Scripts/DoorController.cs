@@ -6,20 +6,22 @@ public class DoorController : MonoBehaviour {
 
     private bool isOpen;
     private Vector3 openPosition;
+    private float moveSpeed = 1.0f;
 
-    public bool RequiresKey { get; set; }
+    public bool RequiresKey;
 
-    public SpecialKey CorrespondingKey { get; set; }
+    public SpecialKey CorrespondingKey;
 
 	// Use this for initialization
 	void Start () {
         isOpen = false;
-        openPosition = new Vector3(0f, -1.5f, 0f);
+        openPosition = transform.position;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+        if (isOpen)
+            OpenDoor();
 	}
 
     void OnTriggerEnter(Collider collider)
@@ -28,29 +30,32 @@ public class DoorController : MonoBehaviour {
         {
             if(RequiresKey)
             {
-                if(PlayerHasCorrectKey())
-                    OpenDoor();
+                if (PlayerHasCorrectKey())
+                    isOpen = true;
             }
             else
             {
-                OpenDoor();
+                isOpen = true;
             }
         }
     }
 
     private bool PlayerHasCorrectKey()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        //return player.HasKey(CorrespondingKey);
-        return true;
+        GameObject playerObject = GameManager.GetInstance().ActivePlayer;
+        if(playerObject != null)
+        {
+            PlayerController player = playerObject.GetComponent<PlayerController>();
+            return player.playerCharacter.InventoryContains(new KeyItem(CorrespondingKey.ToString(), CorrespondingKey));
+        }
+
+        return false;
     }
 
     private void OpenDoor()
     {
-        if(!isOpen)
-        {
-            transform.position += new Vector3(0, -1.5f, 0);
-        }
+        if(transform.position.y > -1.5f)
+            transform.position -= new Vector3(0, openPosition.y, 0);
     }
 }
 
@@ -61,5 +66,6 @@ public enum SpecialKey
     METAL_KEY,
     WATER_KEY,
     AIR_KEY,
-    AIR2_KEY
+    AIR2_KEY,
+    NO_KEY
 }
