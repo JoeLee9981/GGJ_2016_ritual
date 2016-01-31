@@ -22,7 +22,7 @@ public class MonsterController : MonoBehaviour {
     void Start() {
         enemyCharacter = CharacterFactory.GetEnemyCharacter(characterType);
         currentWaypoint = 0;
-        range = 80;
+        range = 160;
         rotationSpeed = 15f;
 
         GameObject playerObject = GameManager.GetInstance().ActivePlayer;
@@ -83,8 +83,14 @@ public class MonsterController : MonoBehaviour {
                 playerCollisionDetected = true;
                 transform.Rotate(Vector3.up * Time.deltaTime * rotationSpeed);
             }
+            else {
+                playerCollisionDetected = false;
+            }
             if (hit.collider.gameObject.CompareTag("Walls")) {
                 collisionDetected = true;
+            }
+            else {
+                collisionDetected = false;
             }
           
         }

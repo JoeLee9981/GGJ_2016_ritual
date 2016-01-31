@@ -24,6 +24,10 @@ public class GameController : MonoBehaviour {
             if (manager.Dead) {
                 //revive and resume
                 ResetPlayerCharacter();
+                GameObject gameOverCanvas = GameObject.FindGameObjectWithTag("GameOver");
+                if (gameOverCanvas != null) {
+                    gameOverCanvas.GetComponent<Canvas>().enabled = false;
+                }
                 ResumeGame();
             }
         }
@@ -50,7 +54,10 @@ public class GameController : MonoBehaviour {
          *  Perform game over clean up here
          */
         PauseGame();
-        GameObject gameOverCanvas = GameObject.FindGameObjectWithTag("game_over");
+        GameObject gameOverCanvas = GameObject.FindGameObjectWithTag("GameOver");
+        if(gameOverCanvas != null) {
+            gameOverCanvas.GetComponent<Canvas>().enabled = true;
+        }
         manager.Dead = true;
     }
 }
