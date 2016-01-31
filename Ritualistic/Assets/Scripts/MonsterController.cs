@@ -48,12 +48,12 @@ public class MonsterController : MonoBehaviour
                     CycleWaypoint();
                 }
 
-                transform.position += GetDirectionVector(transform.position, Waypoints[currentWaypoint].position) * enemyCharacter.MovementSpeed * Time.deltaTime;
+                //transform.position += GetDirectionVector(transform.position, Waypoints[currentWaypoint].position) * enemyCharacter.MovementSpeed * Time.deltaTime;
             }
             else {
                 if (Vector3.Distance(transform.position, GameManager.GetInstance().ActivePlayer.transform.position) < 7f)
                 {
-                    transform.position += GetDirectionVector(transform.position, GameManager.GetInstance().ActivePlayer.transform.position) * enemyCharacter.MovementSpeed * Time.deltaTime;
+                    //transform.position += GetDirectionVector(transform.position, GameManager.GetInstance().ActivePlayer.transform.position) * enemyCharacter.MovementSpeed * Time.deltaTime;
                 }
                 else {
                     playerCollisionDetected = false;
@@ -62,6 +62,13 @@ public class MonsterController : MonoBehaviour
         }
 
         PerformCollisionDetection();
+    }
+
+    void OnCollisionEnter(Collision col) {
+        //print("test");
+        if (col.gameObject.name == "SwordCollider") {
+            //Destroy(col.gameObject);
+        }
     }
 
     private void PerformCollisionDetection()
@@ -97,6 +104,10 @@ public class MonsterController : MonoBehaviour
                 collisionDetected = false;
             }
         }
+    }
+
+    public bool DealDamage(int damage, PlayerCharacter character) {
+        return enemyCharacter.DealDamage(damage, character);
     }
 
     private Vector3 GetDirectionVector(Vector3 coord1, Vector3 coord2)
