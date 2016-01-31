@@ -1,14 +1,10 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System;
 
 public class DoorController : MonoBehaviour {
 
     private bool isOpen;
     private Vector3 openPosition;
     private float moveSpeed = 1.0f;
-
-    public bool RequiresKey;
 
     public SpecialKey CorrespondingKey;
 
@@ -26,18 +22,8 @@ public class DoorController : MonoBehaviour {
 
     void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.tag == "Player")
-        {
-            if(RequiresKey)
-            {
-                if (PlayerHasCorrectKey())
-                    isOpen = true;
-            }
-            else
-            {
-                isOpen = true;
-            }
-        }
+        if (collider.gameObject.tag == "Player" && PlayerHasCorrectKey())
+            isOpen = true;
     }
 
     private bool PlayerHasCorrectKey()
@@ -61,11 +47,6 @@ public class DoorController : MonoBehaviour {
 
 public enum SpecialKey
 {
-    FIRE_KEY,
-    EARTH_KEY,
-    METAL_KEY,
-    WATER_KEY,
-    AIR_KEY,
-    AIR2_KEY,
-    NO_KEY
+    HI_KEY,
+    LOW_KEY
 }
