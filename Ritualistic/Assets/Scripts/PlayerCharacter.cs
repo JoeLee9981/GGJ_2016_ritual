@@ -19,11 +19,11 @@ public class PlayerCharacter : Character {
         ActiveRituals = new List<Ritual>();
         //add no rituals to list of available
         AddRitual(Ritual.NONE);
-        AddRitual(Ritual.AIR);
+        /*AddRitual(Ritual.AIR);
         AddRitual(Ritual.EARTH);
         AddRitual(Ritual.FIRE);
         AddRitual(Ritual.METAL);
-        AddRitual(Ritual.WATER);
+        AddRitual(Ritual.WATER);*/
     }
 
     private void SetupCharacter() {
