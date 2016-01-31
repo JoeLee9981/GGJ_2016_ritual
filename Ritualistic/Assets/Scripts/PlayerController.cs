@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour {
     void Update() {
 
         if (GameManager.GetInstance().Active) {
-            if (playerCharacter.IsDead()) {
+            if (activeCharacter.IsDead()) {
                 controller.GameOver();
             }
 
