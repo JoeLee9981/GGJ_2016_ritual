@@ -107,13 +107,20 @@ public class PlayerController : MonoBehaviour {
     }
 
     void OnCollisionEnter(Collision col) {
+
         foreach (ContactPoint c in col.contacts) {
-            Debug.Log(c.thisCollider.name);
-            if(c.thisCollider.name == "SwordCollider") {
+       
+            if(c.thisCollider.name == "SwordCollider" && (Input.GetKey("space") || Input.GetKey("mouse 0"))) {
                 if(col.gameObject.name == "Monster") {
                     if(col.gameObject.GetComponent<MonsterController>().DealDamage(playerCharacter.Damage, playerCharacter)) {
                         Destroy(col.gameObject);
                     }
+                }
+            }
+            if(c.thisCollider.name == "PlayerHitBox") {
+                if (col.gameObject.name == "Monster") {
+                    activeCharacter.DealDamage(col.gameObject.GetComponent<MonsterController>().enemyCharacter.Damage, activeCharacter as PlayerCharacter);
+                    Debug.Log(playerCharacter.Health);
                 }
             }
         }

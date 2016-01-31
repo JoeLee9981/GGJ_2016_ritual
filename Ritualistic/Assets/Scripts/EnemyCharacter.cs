@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿    using UnityEngine;
 using System.Collections;
 
 public class EnemyCharacter : Character {
@@ -7,6 +7,7 @@ public class EnemyCharacter : Character {
 
     public EnemyCharacter(CharacterType characterType) {
         this.characterType = characterType;
+        MovementSpeed = GameProperties.DEFAULT_ENEMY_SPEED;
         SetupCharacter();
     }
 

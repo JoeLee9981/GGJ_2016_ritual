@@ -15,9 +15,10 @@ public class GameProperties {
     public const int PLAYER_DEFAULT_DAMAGE = 10;
     public const float DEFAULT_ATTACK_SPEED = 1;
     public const float DEFAULT_ATTACK_BONUS = 0;
-    public const float DEFAULT_MOVEMENT_SPEED = 4;
+    public const float DEFAULT_MOVEMENT_SPEED = 3;
     public const float DEFAULT_MOVEMENT_BONUS = 0;
     public const float DEFAULT_SPRINT_BONUS = 0.25f;
+    public const float DEFAULT_ENEMY_SPEED = 2.5f;
     public const string PLAYER_MESH = "demon_hero";
 
     //default earth demon stats

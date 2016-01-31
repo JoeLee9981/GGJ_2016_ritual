@@ -16,7 +16,7 @@ public class MonsterController : MonoBehaviour
     public GameObject target;
 
     public CharacterType characterType;
-    private Character enemyCharacter;
+    public Character enemyCharacter;
     private PlayerController playerController;
 
     // Use this for initialization
@@ -36,9 +36,6 @@ public class MonsterController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!enemyCharacter.IsDead()) {
-            enemyCharacter.DealDamage(1000, playerController.playerCharacter);
-        }
         if (GameManager.GetInstance().Active)
         {
             if (collisionDetected || !playerCollisionDetected)
@@ -53,7 +50,9 @@ public class MonsterController : MonoBehaviour
             else {
                 if (Vector3.Distance(transform.position, GameManager.GetInstance().ActivePlayer.transform.position) < 7f)
                 {
-                    //transform.position += GetDirectionVector(transform.position, GameManager.GetInstance().ActivePlayer.transform.position) * enemyCharacter.MovementSpeed * Time.deltaTime;
+                    Vector3 transformVec = GetDirectionVector(transform.position, GameManager.GetInstance().ActivePlayer.transform.position) * enemyCharacter.MovementSpeed * Time.deltaTime;
+                    transformVec.y = 0;
+                    transform.position += transformVec;
                 }
                 else {
                     playerCollisionDetected = false;
@@ -64,15 +63,59 @@ public class MonsterController : MonoBehaviour
         PerformCollisionDetection();
     }
 
-    void OnCollisionEnter(Collision col) {
-        //print("test");
-        if (col.gameObject.name == "SwordCollider") {
-            //Destroy(col.gameObject);
+    void FixedUpdate() {
+
+        if (GameManager.GetInstance().Active) {
+            // Generate a plane that intersects the transform's position with an upwards normal.
+            Plane playerPlane = new Plane(Vector3.up, transform.position);
+
+            // Generate a ray from the cursor position
+            Ray ray = Camera.main.ScreenPointToRay(playerController.GetComponent<Transform>().position);
+
+            // Determine the point where the cursor ray intersects the plane.
+            // This will be the point that the object must look towards to be looking at the mouse.
+            // Raycasting to a Plane object only gives us a distance, so we'll have to take the distance,
+            //   then find the point along that ray that meets that distance.  This will be the point
+            //   to look at.
+            float hitdist = 0.0f;
+            // If the ray is parallel to the plane, Raycast will return false.
+            if (playerPlane.Raycast(ray, out hitdist)) {
+                // Get the point along the ray that hits the calculated distance.
+                Vector3 targetPoint = ray.GetPoint(hitdist);
+
+                // Determine the target rotation.  This is the rotation if the transform looks at the target point.
+                Quaternion targetRotation = Quaternion.LookRotation(targetPoint - transform.position);
+
+                // Smoothly rotate towards the target point.
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            }
         }
     }
 
+    void OnCollisionEnter(Collision col) {
+
+        if (col.gameObject.name == "Hero") {
+
+            //playerController.activeCharacter.DealDamage(enemyCharacter.Damage, (PlayerCharacter)playerController.activeCharacter);
+            //Debug.Log(playerController.activeCharacter.Health);
+        }
+    }
+    
+
     private void PerformCollisionDetection()
     {
+
+        Vector3 rayDirection = playerController.transform.position - transform.position;
+        if(Physics.Raycast(transform.position, rayDirection, out hit, range)) {
+            if(hit.collider.gameObject.CompareTag("Player")) {
+                playerCollisionDetected = true;
+                transform.Rotate(Vector3.up * Time.deltaTime * rotationSpeed);
+            }
+            if(hit.collider.gameObject.CompareTag("Walls")) {
+                collisionDetected = true;
+            }
+        }
+        /*
         // Collision Detection Rays - Front
         Transform leftRay = transform;
         Transform rightRay = transform;
@@ -103,7 +146,7 @@ public class MonsterController : MonoBehaviour
             {
                 collisionDetected = false;
             }
-        }
+        }*/
     }
 
     public bool DealDamage(int damage, PlayerCharacter character) {
