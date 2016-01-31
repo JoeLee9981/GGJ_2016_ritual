@@ -18,14 +18,12 @@ public class DoorController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isOpen)
-            OpenDoor();
     }
 
     void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.tag == "Player" && PlayerHasCorrectKey())
-            isOpen = true;
+        if (collider.gameObject.tag == "Player" && PlayerHasCorrectKey() && !isOpen)
+            OpenDoor();
     }
 
     private bool PlayerHasCorrectKey()
@@ -46,6 +44,7 @@ public class DoorController : MonoBehaviour
             transform.position -= new Vector3(0, openPosition.y, 0);
 
         player.playerCharacter.RemoveFromInventory(new KeyItem(CorrespondingKey.ToString(), CorrespondingKey));
+        isOpen = true;
     }
 }
 
