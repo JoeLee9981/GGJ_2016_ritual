@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour {
 
             if (Input.GetKey("d")) {
                 Direction.x = 1;
+
             }
             else if (Input.GetKey("a")) {
                 Direction.x = -1;
