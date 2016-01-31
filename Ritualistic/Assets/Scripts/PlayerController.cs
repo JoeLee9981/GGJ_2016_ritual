@@ -163,4 +163,9 @@ public class PlayerController : MonoBehaviour {
         playerCharacter.Damage = GameProperties.PLAYER_DEFAULT_DAMAGE;
     }
 
+	void OnGUI()
+	{
+		GUI.Label(new Rect(100,100,500,500), "HP:  " + activeCharacter.Health);
+
+	}
 }

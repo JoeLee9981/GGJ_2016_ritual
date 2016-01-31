@@ -155,4 +155,6 @@ public class PlayerCharacter : Character {
     public Ritual GetRitualForm() {
         return ActiveRituals[selectedRitual];
     }
+
+
 }
