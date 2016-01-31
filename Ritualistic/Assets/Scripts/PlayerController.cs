@@ -106,6 +106,19 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    void OnCollisionEnter(Collision col) {
+        foreach (ContactPoint c in col.contacts) {
+            Debug.Log(c.thisCollider.name);
+            if(c.thisCollider.name == "SwordCollider") {
+                if(col.gameObject.name == "Monster") {
+                    if(col.gameObject.GetComponent<MonsterController>().DealDamage(playerCharacter.Damage, playerCharacter)) {
+                        Destroy(col.gameObject);
+                    }
+                }
+            }
+        }
+    }
+
     private void UpdateMesh() {
 
         foreach(GameObject obj in activeCharacter.CharacterMeshes) {

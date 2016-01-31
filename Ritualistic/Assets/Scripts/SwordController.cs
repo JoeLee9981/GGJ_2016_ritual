@@ -10,6 +10,13 @@ public class SwordController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+	    
 	}
+
+    void OnCollisionEnterChild(Collision col) {
+        print("test");
+        if (col.gameObject.name == "Monster") {
+            Destroy(col.gameObject);
+        }
+    }
 }
