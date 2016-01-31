@@ -35,10 +35,10 @@ public class MonsterController : MonoBehaviour {
     void Update() {
         if (GameManager.GetInstance().Active) {
             if (collisionDetected || !playerCollisionDetected) {
-                if (Vector3.Distance(transform.position, Waypoints[currentWaypoint].position) < .1 || collisionDetected) {
+               /* if (Vector3.Distance(transform.position, Waypoints[currentWaypoint].position) < .1 || collisionDetected) {
                     CycleWaypoint();
                 }
-
+                */
                 //transform.position += GetDirectionVector(transform.position, Waypoints[currentWaypoint].position) * enemyCharacter.MovementSpeed * Time.deltaTime;
             }
             else {
