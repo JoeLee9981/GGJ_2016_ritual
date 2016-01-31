@@ -6,10 +6,10 @@ public abstract class Character {
 
     protected Action<PlayerCharacter> OnDeathAction;
 
-    public float MaxHealth;
+    public int MaxHealth;
 
-    private float health;
-    public float Health {
+    private int health;
+    public int Health {
         set {
             if (value <= MaxHealth) {
                 health = value;
@@ -26,15 +26,24 @@ public abstract class Character {
     private float armor;
     public float Armor {
         get {
-            return Armor * (1 + ArmorBonus);
+            return armor;
         }
         set {
-            armor = value;
+            armor = value + (value * ArmorBonus);
         }
     }
-    public float ArmorBonus;
+    private float armorBonus;
+    public float ArmorBonus {
+        get {
+            return armorBonus;
+        }
+        set {
+            armorBonus = value;
+            Armor += Armor * value;
+        }
+    }
 
-    public float Damage;
+    public int Damage;
 
     public float AttackSpeedBonus = GameProperties.DEFAULT_ATTACK_BONUS;
 
@@ -61,15 +70,18 @@ public abstract class Character {
     public float SpeedBonus = GameProperties.DEFAULT_MOVEMENT_BONUS;
 
     //TODO Change this to switch out mesh
-    public Color CharacterMesh;
+    public GameObject[] CharacterMeshes;
 
     //returns true if character is dead
     public bool IsDead() {
         return Health <= 0;
     }
 
-    public bool DealDamage(float damageAmt, PlayerCharacter player) {
-        health -= damageAmt - (damageAmt * Armor);
+    public bool DealDamage(int damageAmt, PlayerCharacter player) {
+        if(Health <= 0) {
+            return true;
+        }
+        Health = Health - (damageAmt - (int)(damageAmt * Armor));
 
         if(OnDeathAction != null) {
             OnDeathAction(player);

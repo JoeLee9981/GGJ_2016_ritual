@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour {
         GameObject gameObj = GameObject.FindGameObjectWithTag("GameController");
         if (gameObj != null) {
             controller = gameObj.GetComponent<GameController>();
-        }
+        }   
     }
 
     // Update is called once per frame
@@ -108,6 +108,9 @@ public class PlayerController : MonoBehaviour {
 
     private void UpdateMesh() {
 
+        foreach(GameObject obj in activeCharacter.CharacterMeshes) {
+            obj.GetComponent<MeshRenderer>().enabled = false;
+        }
         switch (playerCharacter.GetRitualForm()) {
             case Ritual.AIR:
                 activeCharacter = CharacterFactory.GetPlayerCharacter(CharacterType.AIR_DEMON);
@@ -128,7 +131,9 @@ public class PlayerController : MonoBehaviour {
                 activeCharacter = playerCharacter;
                 break;
         }
-        GameManager.GetInstance().ActivePlayer.GetComponent<Renderer>().material.color = activeCharacter.CharacterMesh;
+        foreach (GameObject obj in activeCharacter.CharacterMeshes) {
+            obj.GetComponent<MeshRenderer>().enabled = true;
+        }
     }
 
     public void ResetPlayer() {

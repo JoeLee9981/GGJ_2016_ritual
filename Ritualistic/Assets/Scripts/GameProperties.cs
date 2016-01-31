@@ -10,59 +10,59 @@ public class GameProperties {
     public const float PLAYER_X_START = 0;
     public const float PLAYER_Y_START = 0.75f;
     public const float PLAYER_Z_START = 0;
-    public const float PLAYER_DEFAULT_HEALTH = 100;
+    public const int PLAYER_DEFAULT_HEALTH = 100;
     public const float PLAYER_DEFAULT_ARMOR = 0.1f;
-    public const float PLAYER_DEFAULT_DAMAGE = 10;
+    public const int PLAYER_DEFAULT_DAMAGE = 10;
     public const float DEFAULT_ATTACK_SPEED = 1;
     public const float DEFAULT_ATTACK_BONUS = 0;
     public const float DEFAULT_MOVEMENT_SPEED = 4;
     public const float DEFAULT_MOVEMENT_BONUS = 0;
     public const float DEFAULT_SPRINT_BONUS = 0.25f;
-    public static Color PLAYER_MESH = Color.red;
+    public const string PLAYER_MESH = "demon_hero";
 
     //default earth demon stats
     public const float EARTH_ARMOR = 0.2f;
-    public const float EARTH_HEALTH = 150;
-    public const float EARTH_DAMAGE = 15;
-    public static Color EARTH_MESH = Color.green;
+    public const int EARTH_HEALTH = 150;
+    public const int EARTH_DAMAGE = 15;
+    public const string EARTH_MESH = "demon_rock";
 
     //default water demon stats
     public const float WATER_ARMOR = 0.3f;
-    public const float WATER_HEALTH = 200;
-    public const float WATER_DAMAGE = 12;
-    public static Color WATER_MESH = Color.blue;
+    public const int WATER_HEALTH = 200;
+    public const int WATER_DAMAGE = 12;
+    public const string WATER_MESH = "demon_water";
 
     //default fire demon stats
     public const float FIRE_ARMOR = 0.12f;
-    public const float FIRE_HEALTH = 130;
-    public const float FIRE_DAMAGE = 25;
-    public static Color FIRE_MESH = Color.yellow;
+    public const int FIRE_HEALTH = 130;
+    public const int FIRE_DAMAGE = 25;
+    public const string FIRE_MESH = "demon_fire";
 
     //default air demon stats
     public const float AIR_ARMOR = 0.5f;
-    public const float AIR_HEALTH = 400;
-    public const float AIR_DAMAGE = 10;
+    public const int AIR_HEALTH = 400;
+    public const int AIR_DAMAGE = 10;
     public const float AIR_SPEED = 0.3f;
-    public static Color AIR_MESH = Color.magenta;
+    public const string AIR_MESH = "demon_air";
 
     //default metal armor
     public const float METAL_ARMOR = 0.5f;
-    public const float METAL_HEALTH = 400;
-    public const float METAL_DAMAGE = 10;
+    public const int METAL_HEALTH = 400;
+    public const int METAL_DAMAGE = 10;
     public const float METAL_ATTACK_SPEED = 0.5f;
-    public static Color METAL_MESH = Color.gray;
+    public const string METAL_MESH = "demon_metal";
 
     //default enemy stats
     public const float ENEMY_ARMOR = 0.0f;
-    public const float ENEMY_HEALTH = 10;
-    public const float ENEMY_DAMAGE = 30;
-    public static Color ENEMY_MESH = Color.black;
+    public const int ENEMY_HEALTH = 30;
+    public const int ENEMY_DAMAGE = 10;
+    public const string ENEMY_MESH = "demon_monk";
 
     //default boss stats
     public const float BOSS_ARMOR = 0.5f;
-    public const float BOSS_HEALTH = 625;
-    public const float BOSS_DAMAGE = 50;
-    public static Color BOSS_MESH = Color.cyan;
+    public const int BOSS_HEALTH = 625;
+    public const int BOSS_DAMAGE = 50;
+    public const string BOSS_MESH = "demon_air";
 
     public static Vector3 GetDefaultPlayerVector() {
         return new Vector3(PLAYER_X_START, PLAYER_Y_START, PLAYER_Z_START);

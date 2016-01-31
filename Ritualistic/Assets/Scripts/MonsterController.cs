@@ -17,20 +17,28 @@ public class MonsterController : MonoBehaviour
 
     public CharacterType characterType;
     private Character enemyCharacter;
+    private PlayerController playerController;
 
     // Use this for initialization
     void Start()
     {
         enemyCharacter = CharacterFactory.GetEnemyCharacter(characterType);
-        GetComponent<Renderer>().material.color = enemyCharacter.CharacterMesh;
         currentWaypoint = 0;
         range = 80;
         rotationSpeed = 15f;
+
+        GameObject playerObject = GameManager.GetInstance().ActivePlayer;
+        if (playerObject != null) {
+            playerController = playerObject.GetComponent<PlayerController>();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!enemyCharacter.IsDead()) {
+            enemyCharacter.DealDamage(1000, playerController.playerCharacter);
+        }
         if (GameManager.GetInstance().Active)
         {
             if (collisionDetected || !playerCollisionDetected)

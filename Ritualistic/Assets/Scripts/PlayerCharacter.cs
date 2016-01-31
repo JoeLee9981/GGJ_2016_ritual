@@ -46,11 +46,11 @@ public class PlayerCharacter : Character {
     }
 
     private void SetupPlayer() {
-        MaxHealth = GameProperties.PLAYER_DEFAULT_ARMOR;
+        MaxHealth = GameProperties.PLAYER_DEFAULT_HEALTH;
         Armor = GameProperties.PLAYER_DEFAULT_ARMOR;
         Damage = GameProperties.PLAYER_DEFAULT_DAMAGE;
         Health = MaxHealth;
-        CharacterMesh = GameProperties.PLAYER_MESH;
+        CharacterMeshes = GameObject.FindGameObjectsWithTag(GameProperties.PLAYER_MESH);
     }
     private void SetupAir() {
         MaxHealth = GameProperties.AIR_HEALTH;
@@ -58,7 +58,7 @@ public class PlayerCharacter : Character {
         Damage = GameProperties.AIR_DAMAGE;
         SpeedBonus = GameProperties.AIR_SPEED;
         Health = MaxHealth;
-        CharacterMesh = GameProperties.AIR_MESH;
+        CharacterMeshes = GameObject.FindGameObjectsWithTag(GameProperties.AIR_MESH); ;
     }
 
     private void SetupMetal() {
@@ -67,7 +67,7 @@ public class PlayerCharacter : Character {
         Damage = GameProperties.METAL_DAMAGE;
         AttackSpeedBonus = GameProperties.METAL_ATTACK_SPEED;
         Health = MaxHealth;
-        CharacterMesh = GameProperties.METAL_MESH;
+        CharacterMeshes = GameObject.FindGameObjectsWithTag(GameProperties.METAL_MESH); ;
     }
 
     private void SetupFire() {
@@ -75,7 +75,7 @@ public class PlayerCharacter : Character {
         Armor = GameProperties.FIRE_ARMOR;
         Damage = GameProperties.FIRE_DAMAGE;
         Health = MaxHealth;
-        CharacterMesh = GameProperties.FIRE_MESH;
+        CharacterMeshes = GameObject.FindGameObjectsWithTag(GameProperties.FIRE_MESH); ;
     }
 
     private void SetupEarth() {
@@ -83,7 +83,7 @@ public class PlayerCharacter : Character {
         Armor = GameProperties.EARTH_ARMOR;
         Damage = GameProperties.EARTH_DAMAGE;
         Health = MaxHealth;
-        CharacterMesh = GameProperties.EARTH_MESH;
+        CharacterMeshes = GameObject.FindGameObjectsWithTag(GameProperties.EARTH_MESH); ;
     }
 
     private void SetupWater() {
@@ -91,7 +91,7 @@ public class PlayerCharacter : Character {
         Armor = GameProperties.WATER_ARMOR;
         Damage = GameProperties.WATER_DAMAGE;
         Health = MaxHealth;
-        CharacterMesh = GameProperties.WATER_MESH;
+        CharacterMeshes = GameObject.FindGameObjectsWithTag(GameProperties.WATER_MESH); ;
     }
 
     public void AddToInventory(Item item) {

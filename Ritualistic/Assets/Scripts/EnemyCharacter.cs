@@ -42,7 +42,6 @@ public class EnemyCharacter : Character {
         Damage = GameProperties.AIR_DAMAGE;
         SpeedBonus = GameProperties.AIR_SPEED;
         Health = MaxHealth;
-        CharacterMesh = GameProperties.AIR_MESH;
         OnDeathAction += OnDeath;
     }
 
@@ -52,7 +51,6 @@ public class EnemyCharacter : Character {
         Damage = GameProperties.METAL_DAMAGE;
         AttackSpeedBonus = GameProperties.METAL_ATTACK_SPEED;
         Health = MaxHealth;
-        CharacterMesh = GameProperties.METAL_MESH;
         OnDeathAction += OnDeath;
     }
 
@@ -61,7 +59,6 @@ public class EnemyCharacter : Character {
         Armor = GameProperties.BOSS_ARMOR;
         Damage = GameProperties.BOSS_DAMAGE;
         Health = MaxHealth;
-        CharacterMesh = GameProperties.BOSS_MESH;
     }
 
     private void SetupFire() {
@@ -69,7 +66,6 @@ public class EnemyCharacter : Character {
         Armor = GameProperties.FIRE_ARMOR;
         Damage = GameProperties.FIRE_DAMAGE;
         Health = MaxHealth;
-        CharacterMesh = GameProperties.FIRE_MESH;
         OnDeathAction += OnDeath;
     }
 
@@ -78,7 +74,6 @@ public class EnemyCharacter : Character {
         Armor = GameProperties.EARTH_ARMOR;
         Damage = GameProperties.EARTH_DAMAGE;
         Health = MaxHealth;
-        CharacterMesh = GameProperties.EARTH_MESH;
         OnDeathAction += OnDeath;
     }
 
@@ -87,7 +82,6 @@ public class EnemyCharacter : Character {
         Armor = GameProperties.WATER_ARMOR;
         Damage = GameProperties.WATER_DAMAGE;
         Health = MaxHealth;
-        CharacterMesh = GameProperties.WATER_MESH;
         OnDeathAction += OnDeath;
     }
 
@@ -96,7 +90,6 @@ public class EnemyCharacter : Character {
         Armor = GameProperties.ENEMY_ARMOR;
         Damage = GameProperties.ENEMY_DAMAGE;
         Health = MaxHealth;
-        CharacterMesh = GameProperties.ENEMY_MESH;
     }
 
     public void OnDeath(PlayerCharacter player) {
