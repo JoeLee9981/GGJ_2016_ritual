@@ -18,7 +18,7 @@ public class MainCameraController : MonoBehaviour {
     {
         Offset.y -= Input.GetAxis("Mouse ScrollWheel");
         if (Offset.y > 5) { Offset.y = 5; }
-        if (Offset.y < 2.5) { Offset.y = 2.5f; }
+        if (Offset.y < 1) { Offset.y = 1; }
     }
 
     void LateUpdate() {
