@@ -108,8 +108,8 @@ public class PlayerCharacter : Character {
     }
 
     public bool InventoryContains(string ItemName) {
-        foreach(Item item in Inventory) {
-            if(item.ItemName.Equals(ItemName)) {
+        foreach (Item item in Inventory) {
+            if (item.ItemName.Equals(ItemName)) {
                 return true;
             }
         }
@@ -117,10 +117,10 @@ public class PlayerCharacter : Character {
     }
 
     public bool HasKey(SpecialKey key) {
-        foreach(Item item in Inventory) {
-            if(item is KeyItem) {
+        foreach (Item item in Inventory) {
+            if (item is KeyItem) {
                 KeyItem keyItem = item as KeyItem;
-                if(keyItem.KeyType == key) {
+                if (keyItem.KeyType == key) {
                     return true;
                 }
             }
@@ -129,7 +129,7 @@ public class PlayerCharacter : Character {
     }
 
     public void ClearInventory() {
-        foreach(Item item in Inventory) {
+        foreach (Item item in Inventory) {
             item.OnRemove(this);
         }
         Inventory.Clear();

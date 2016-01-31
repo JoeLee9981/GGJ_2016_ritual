@@ -25,11 +25,11 @@ public class PlayerController : MonoBehaviour {
     void Start() {
         playerCharacter = CharacterFactory.GetPlayerCharacter(CharacterType.PLAYER) as PlayerCharacter;
         activeCharacter = playerCharacter;
-        
+
         GameObject gameObj = GameObject.FindGameObjectWithTag("GameController");
         if (gameObj != null) {
             controller = gameObj.GetComponent<GameController>();
-        }   
+        }
     }
 
     // Update is called once per frame
@@ -109,15 +109,15 @@ public class PlayerController : MonoBehaviour {
     void OnCollisionEnter(Collision col) {
 
         foreach (ContactPoint c in col.contacts) {
-       
-            if(c.thisCollider.name == "SwordCollider" && (Input.GetKey("space") || Input.GetKey("mouse 0"))) {
-                if(col.gameObject.name == "Monster") {
-                    if(col.gameObject.GetComponent<MonsterController>().DealDamage(playerCharacter.Damage, playerCharacter)) {
+
+            if (c.thisCollider.name == "SwordCollider" && (Input.GetKey("space") || Input.GetKey("mouse 0"))) {
+                if (col.gameObject.name == "Monster") {
+                    if (col.gameObject.GetComponent<MonsterController>().DealDamage(playerCharacter.Damage, playerCharacter)) {
                         Destroy(col.gameObject);
                     }
                 }
             }
-            if(c.thisCollider.name == "PlayerHitBox") {
+            if (c.thisCollider.name == "PlayerHitBox") {
                 if (col.gameObject.name == "Monster") {
                     activeCharacter.DealDamage(col.gameObject.GetComponent<MonsterController>().enemyCharacter.Damage, activeCharacter as PlayerCharacter);
                     Debug.Log(playerCharacter.Health);
@@ -128,7 +128,7 @@ public class PlayerController : MonoBehaviour {
 
     private void UpdateMesh() {
 
-        foreach(GameObject obj in activeCharacter.CharacterMeshes) {
+        foreach (GameObject obj in activeCharacter.CharacterMeshes) {
             obj.GetComponent<MeshRenderer>().enabled = false;
         }
         switch (playerCharacter.GetRitualForm()) {

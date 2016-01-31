@@ -1,4 +1,4 @@
-﻿    using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 public class EnemyCharacter : Character {
@@ -12,7 +12,7 @@ public class EnemyCharacter : Character {
     }
 
     private void SetupCharacter() {
-        switch(characterType) {
+        switch (characterType) {
             case CharacterType.BOSS:
                 SetupBoss();
                 break;
@@ -100,7 +100,7 @@ public class EnemyCharacter : Character {
         else if (characterType == CharacterType.EARTH_DEMON) {
             player.AddRitual(Ritual.EARTH);
         }
-        else if(characterType == CharacterType.FIRE_DEMON) {
+        else if (characterType == CharacterType.FIRE_DEMON) {
             player.AddRitual(Ritual.FIRE);
         }
         else if (characterType == CharacterType.METAL_DEMON) {

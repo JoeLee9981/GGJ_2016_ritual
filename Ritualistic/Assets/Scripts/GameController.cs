@@ -6,22 +6,22 @@ public class GameController : MonoBehaviour {
     GameManager manager;
 
     // Use this for initialization
-    void Start () {
+    void Start() {
         manager = GameManager.GetInstance();
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update() {
         if (Input.GetButtonDown("Cancel")) {
-            if(manager.Active) {
+            if (manager.Active) {
                 PauseGame();
             }
             else {
                 ResumeGame();
             }
         }
-        if(Input.GetButtonDown("Action")) {
-            if(manager.Dead) {
+        if (Input.GetButtonDown("Action")) {
+            if (manager.Dead) {
                 //revive and resume
                 ResetPlayerCharacter();
                 ResumeGame();

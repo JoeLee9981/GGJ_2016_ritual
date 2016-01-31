@@ -1,38 +1,38 @@
 ﻿using UnityEngine;
 
-public class DoorController : MonoBehaviour {
-
+public class DoorController : MonoBehaviour
+{
+    private PlayerController player;
     private bool isOpen;
     private Vector3 openPosition;
-    private float moveSpeed = 1.0f;
 
     public SpecialKey CorrespondingKey;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         isOpen = false;
         openPosition = transform.position;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        if (isOpen)
-            OpenDoor();
-	}
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+    }
 
     void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.tag == "Player" && PlayerHasCorrectKey())
-            isOpen = true;
+        if (collider.gameObject.tag == "Player" && PlayerHasCorrectKey() && !isOpen)
+            OpenDoor();
     }
 
     private bool PlayerHasCorrectKey()
     {
         GameObject playerObject = GameManager.GetInstance().ActivePlayer;
-        if(playerObject != null)
+        if (playerObject != null)
         {
-            PlayerController player = playerObject.GetComponent<PlayerController>();
-            return player.playerCharacter.InventoryContains(new KeyItem(CorrespondingKey.ToString(), CorrespondingKey));
+            player = playerObject.GetComponent<PlayerController>();
+            return player.playerCharacter.HasKey(CorrespondingKey);
         }
 
         return false;
@@ -40,8 +40,11 @@ public class DoorController : MonoBehaviour {
 
     private void OpenDoor()
     {
-        if(transform.position.y > -1.5f)
+        if (transform.position.y > -1.5f)
             transform.position -= new Vector3(0, openPosition.y, 0);
+
+        player.playerCharacter.RemoveFromInventory(new KeyItem(CorrespondingKey.ToString(), CorrespondingKey));
+        isOpen = true;
     }
 }
 

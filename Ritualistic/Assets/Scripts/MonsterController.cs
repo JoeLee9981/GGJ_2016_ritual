@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MonsterController : MonoBehaviour
-{
+public class MonsterController : MonoBehaviour {
     public Vector3 Direction;
     public Transform[] Waypoints;
     private int currentWaypoint;
@@ -20,8 +19,7 @@ public class MonsterController : MonoBehaviour
     private PlayerController playerController;
 
     // Use this for initialization
-    void Start()
-    {
+    void Start() {
         enemyCharacter = CharacterFactory.GetEnemyCharacter(characterType);
         currentWaypoint = 0;
         range = 80;
@@ -34,22 +32,17 @@ public class MonsterController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (GameManager.GetInstance().Active)
-        {
-            if (collisionDetected || !playerCollisionDetected)
-            {
-                if (Vector3.Distance(transform.position, Waypoints[currentWaypoint].position) < .1 || collisionDetected)
-                {
+    void Update() {
+        if (GameManager.GetInstance().Active) {
+            if (collisionDetected || !playerCollisionDetected) {
+                if (Vector3.Distance(transform.position, Waypoints[currentWaypoint].position) < .1 || collisionDetected) {
                     CycleWaypoint();
                 }
 
                 //transform.position += GetDirectionVector(transform.position, Waypoints[currentWaypoint].position) * enemyCharacter.MovementSpeed * Time.deltaTime;
             }
             else {
-                if (Vector3.Distance(transform.position, GameManager.GetInstance().ActivePlayer.transform.position) < 7f)
-                {
+                if (Vector3.Distance(transform.position, GameManager.GetInstance().ActivePlayer.transform.position) < 7f) {
                     Vector3 transformVec = GetDirectionVector(transform.position, GameManager.GetInstance().ActivePlayer.transform.position) * enemyCharacter.MovementSpeed * Time.deltaTime;
                     transformVec.y = 0;
                     transform.position += transformVec;
@@ -100,18 +93,17 @@ public class MonsterController : MonoBehaviour
             //Debug.Log(playerController.activeCharacter.Health);
         }
     }
-    
 
-    private void PerformCollisionDetection()
-    {
+
+    private void PerformCollisionDetection() {
 
         Vector3 rayDirection = playerController.transform.position - transform.position;
-        if(Physics.Raycast(transform.position, rayDirection, out hit, range)) {
-            if(hit.collider.gameObject.CompareTag("Player")) {
+        if (Physics.Raycast(transform.position, rayDirection, out hit, range)) {
+            if (hit.collider.gameObject.CompareTag("Player")) {
                 playerCollisionDetected = true;
                 transform.Rotate(Vector3.up * Time.deltaTime * rotationSpeed);
             }
-            if(hit.collider.gameObject.CompareTag("Walls")) {
+            if (hit.collider.gameObject.CompareTag("Walls")) {
                 collisionDetected = true;
             }
         }
@@ -153,16 +145,13 @@ public class MonsterController : MonoBehaviour
         return enemyCharacter.DealDamage(damage, character);
     }
 
-    private Vector3 GetDirectionVector(Vector3 coord1, Vector3 coord2)
-    {
+    private Vector3 GetDirectionVector(Vector3 coord1, Vector3 coord2) {
         return (coord2 - coord1) / (coord2 - coord1).magnitude;
     }
 
-    private void CycleWaypoint()
-    {
+    private void CycleWaypoint() {
         currentWaypoint++;
-        if (currentWaypoint >= Waypoints.Length)
-        {
+        if (currentWaypoint >= Waypoints.Length) {
             currentWaypoint = 0;
         }
     }

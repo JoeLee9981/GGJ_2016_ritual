@@ -79,8 +79,9 @@ ModelImporter:
     3300002: polySurface17
     4300000: polySurface17
     4300002: polySurface14
-    7400000: Take 001
+    7400000: OpenChest
     9500000: //RootNode
+    11100000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -101,11 +102,107 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: OpenChest
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: group5
+        weight: 1
+      - path: group5/polySurface14
+        weight: 1
+      - path: group5/polySurface17
+        weight: 1
+      - path: side1
+        weight: 1
+      - path: side1/polySurface8
+        weight: 1
+      - path: side1/polySurface8/transform24
+        weight: 1
+      - path: side1/polySurface9
+        weight: 1
+      - path: side1/polySurface9/transform25
+        weight: 1
+      - path: side1/polySurface10
+        weight: 1
+      - path: side1/polySurface10/transform20
+        weight: 1
+      - path: side1/polySurface11
+        weight: 1
+      - path: side1/polySurface11/transform23
+        weight: 1
+      - path: side1/polySurface12
+        weight: 1
+      - path: side1/polySurface12/transform22
+        weight: 1
+      - path: side1/polySurface13
+        weight: 1
+      - path: side1/polySurface13/transform21
+        weight: 1
+      - path: side1/polySurface14 1
+        weight: 1
+      - path: side1/polySurface14 1/transform28
+        weight: 1
+      - path: side1/polySurface15
+        weight: 1
+      - path: side1/polySurface15/transform27
+        weight: 1
+      - path: side1/polySurface16
+        weight: 1
+      - path: side1/polySurface16/transform26
+        weight: 1
+      - path: side1/polySurface17 1
+        weight: 1
+      - path: side1/polySurface17 1/transform19
+        weight: 1
+      - path: side1/polySurface18
+        weight: 1
+      - path: side1/polySurface18/transform16
+        weight: 1
+      - path: side1/polySurface19
+        weight: 1
+      - path: side1/polySurface19/transform15
+        weight: 1
+      - path: side1/polySurface20
+        weight: 1
+      - path: side1/polySurface20/transform18
+        weight: 1
+      - path: side1/polySurface21
+        weight: 1
+      - path: side1/polySurface21/transform17
+        weight: 1
+      - path: side1/transform14
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 50
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
@@ -139,7 +236,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 1
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
