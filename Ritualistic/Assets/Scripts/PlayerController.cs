@@ -112,7 +112,10 @@ public class PlayerController : MonoBehaviour {
 
             if (c.thisCollider.name == "SwordCollider" && (Input.GetKey("space") || Input.GetKey("mouse 0"))) {
                 if (col.gameObject.tag == "Monster") {
-                    if (col.gameObject.GetComponent<MonsterController>().DealDamage(playerCharacter.Damage, playerCharacter)) {
+                    Debug.Log("HIT: " + col.gameObject.name + " for: " + playerCharacter.Damage);
+                    MonsterController monsterController = col.gameObject.GetComponent<MonsterController>();
+                    monsterController.AddHitText(playerCharacter.Damage.ToString());
+                    if (monsterController.DealDamage(playerCharacter.Damage, playerCharacter)) {
                         Destroy(col.gameObject);
                     }
                 }
@@ -124,7 +127,7 @@ public class PlayerController : MonoBehaviour {
                 }
                 if (col.gameObject.tag == "Weapon")
                 {
-                    activeCharacter.DealDamage(col.gameObject.GetComponent<Transform>().parent.GetComponent<MonsterController>().enemyCharacter.Damage, activeCharacter as PlayerCharacter);
+                    activeCharacter.DealDamage(col.gameObject.GetComponent<Transform>().root.GetComponent<MonsterController>().enemyCharacter.Damage, activeCharacter as PlayerCharacter);
                     Debug.Log("Hit by Pitchfork");
                 }
             }

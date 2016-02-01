@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class MonsterController : MonoBehaviour {
     public Vector3 Direction;
@@ -18,6 +19,8 @@ public class MonsterController : MonoBehaviour {
     public Character enemyCharacter;
     private PlayerController playerController;
 
+    public List<HitText> hitTexts;
+
     // Use this for initialization
     void Start() {
         enemyCharacter = CharacterFactory.GetEnemyCharacter(characterType);
@@ -29,10 +32,20 @@ public class MonsterController : MonoBehaviour {
         if (playerObject != null) {
             playerController = playerObject.GetComponent<PlayerController>();
         }
+
+        hitTexts = new List<HitText>();
     }
 
     // Update is called once per frame
     void Update() {
+        for(int i = 0; i < hitTexts.Count; i++) {
+            if (hitTexts[i].Display) {
+                hitTexts[i].Update();
+            }
+            else {
+                hitTexts.RemoveAt(i);
+            }
+        }
         if (GameManager.GetInstance().Active) {
             if (collisionDetected || !playerCollisionDetected) {
                /* if (Vector3.Distance(transform.position, Waypoints[currentWaypoint].position) < .1 || collisionDetected) {
@@ -74,6 +87,11 @@ public class MonsterController : MonoBehaviour {
         }
     }
 
+    void OnGUI() {
+        foreach(HitText hitText in hitTexts) {
+            hitText.OnGUI();
+        }
+    }
 
     private void PerformCollisionDetection() {
 
@@ -137,5 +155,12 @@ public class MonsterController : MonoBehaviour {
         if (currentWaypoint >= Waypoints.Length) {
             currentWaypoint = 0;
         }
+    }
+
+    public void AddHitText(string text) {
+        HitText hitText = new HitText();
+        hitTexts.Add(hitText);
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
+        hitText.ShowText(text, GameProperties.HITS_TEXT_TIME, screenPos.x, screenPos.y);
     }
 }

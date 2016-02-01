@@ -21,6 +21,8 @@ public class GameProperties {
     public const float DEFAULT_ENEMY_SPEED = 2.5f;
     public const string PLAYER_MESH = "demon_hero";
 
+    public const int HITS_TEXT_TIME = 1000;
+
     //default earth demon stats
     public const float EARTH_ARMOR = 0.2f;
     public const int EARTH_HEALTH = 150;
