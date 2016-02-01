@@ -13,8 +13,8 @@ public enum CharacterType {
 
 public static class CharacterFactory {
 
-	public static Character GetEnemyCharacter(CharacterType characterType) {
-        Character character = new EnemyCharacter(characterType);
+	public static Character GetEnemyCharacter(CharacterType characterType, MonsterController controller) {
+        Character character = new EnemyCharacter(characterType, controller);
         return character;
     }
 

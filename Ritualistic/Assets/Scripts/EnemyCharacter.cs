@@ -3,11 +3,14 @@ using System.Collections;
 
 public class EnemyCharacter : Character {
 
-    CharacterType characterType;
+    protected CharacterType characterType;
+    protected MonsterController controller;
 
-    public EnemyCharacter(CharacterType characterType) {
+    public EnemyCharacter(CharacterType characterType, MonsterController controller) {
         this.characterType = characterType;
         MovementSpeed = GameProperties.DEFAULT_ENEMY_SPEED;
+        this.controller = controller;
+        OnDeathAction += OnDeath;
         SetupCharacter();
     }
 
@@ -43,7 +46,6 @@ public class EnemyCharacter : Character {
         Damage = GameProperties.AIR_DAMAGE;
         SpeedBonus = GameProperties.AIR_SPEED;
         Health = MaxHealth;
-        OnDeathAction += OnDeath;
     }
 
     private void SetupMetal() {
@@ -52,7 +54,6 @@ public class EnemyCharacter : Character {
         Damage = GameProperties.METAL_DAMAGE;
         AttackSpeedBonus = GameProperties.METAL_ATTACK_SPEED;
         Health = MaxHealth;
-        OnDeathAction += OnDeath;
     }
 
     private void SetupBoss() {
@@ -67,7 +68,6 @@ public class EnemyCharacter : Character {
         Armor = GameProperties.FIRE_ARMOR;
         Damage = GameProperties.FIRE_DAMAGE;
         Health = MaxHealth;
-        OnDeathAction += OnDeath;
     }
 
     private void SetupEarth() {
@@ -75,7 +75,6 @@ public class EnemyCharacter : Character {
         Armor = GameProperties.EARTH_ARMOR;
         Damage = GameProperties.EARTH_DAMAGE;
         Health = MaxHealth;
-        OnDeathAction += OnDeath;
     }
 
     private void SetupWater() {
@@ -83,7 +82,6 @@ public class EnemyCharacter : Character {
         Armor = GameProperties.WATER_ARMOR;
         Damage = GameProperties.WATER_DAMAGE;
         Health = MaxHealth;
-        OnDeathAction += OnDeath;
     }
 
     private void SetupEnemey() {
@@ -109,5 +107,6 @@ public class EnemyCharacter : Character {
         else if (characterType == CharacterType.WATER_DEMON) {
             player.AddRitual(Ritual.WATER);
         }
+        controller.DestroyEnemy();
     }
 }

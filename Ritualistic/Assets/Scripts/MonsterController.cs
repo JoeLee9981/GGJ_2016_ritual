@@ -23,7 +23,7 @@ public class MonsterController : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        enemyCharacter = CharacterFactory.GetEnemyCharacter(characterType);
+        enemyCharacter = CharacterFactory.GetEnemyCharacter(characterType, this);
         currentWaypoint = 0;
         range = 160;
         rotationSpeed = 15f;
@@ -142,7 +142,7 @@ public class MonsterController : MonoBehaviour {
         }*/
     }
 
-    public bool DealDamage(int damage, PlayerCharacter character) {
+    public int DealDamage(int damage, PlayerCharacter character) {
         return enemyCharacter.DealDamage(damage, character);
     }
 
@@ -162,5 +162,9 @@ public class MonsterController : MonoBehaviour {
         hitTexts.Add(hitText);
         Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
         hitText.ShowText(text, GameProperties.HITS_TEXT_TIME, screenPos.x, screenPos.y);
+    }
+
+    public void DestroyEnemy() {
+        Destroy(this.gameObject);
     }
 }

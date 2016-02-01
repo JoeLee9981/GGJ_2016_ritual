@@ -77,16 +77,19 @@ public abstract class Character {
         return Health <= 0;
     }
 
-    public bool DealDamage(int damageAmt, PlayerCharacter player) {
+    public int DealDamage(int damageAmt, PlayerCharacter player) {
         if (Health <= 0) {
-            return true;
+            return 0;
         }
-        Health = Health - (damageAmt - (int)(damageAmt * Armor));
+        int damage = damageAmt - (int)(damageAmt * Armor);
+        Health -= damage;
 
-        if (OnDeathAction != null) {
-            OnDeathAction(player);
+        if(IsDead()) { 
+            if (OnDeathAction != null) {
+                OnDeathAction(player);
+            }
         }
-        return IsDead();
+        return damage;
     }
 
 

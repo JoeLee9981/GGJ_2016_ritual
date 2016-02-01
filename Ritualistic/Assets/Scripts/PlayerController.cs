@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour {
     public Character activeCharacter;
 
     private GameController controller;
+    public List<HitText> hitTexts;
 
     // Use this for initialization
     void Start() {
@@ -30,12 +31,23 @@ public class PlayerController : MonoBehaviour {
         if (gameObj != null) {
             controller = gameObj.GetComponent<GameController>();
         }
+        hitTexts = new List<HitText>();
     }
 
     // Update is called once per frame
     void Update() {
 
         if (GameManager.GetInstance().Active) {
+
+            for (int i = 0; i < hitTexts.Count; i++) {
+                if (hitTexts[i].Display) {
+                    hitTexts[i].Update();
+                }
+                else {
+                    hitTexts.RemoveAt(i);
+                }
+            }
+
             if (activeCharacter.IsDead()) {
                 controller.GameOver();
             }
@@ -114,20 +126,22 @@ public class PlayerController : MonoBehaviour {
                 if (col.gameObject.tag == "Monster") {
                     Debug.Log("HIT: " + col.gameObject.name + " for: " + playerCharacter.Damage);
                     MonsterController monsterController = col.gameObject.GetComponent<MonsterController>();
-                    monsterController.AddHitText(playerCharacter.Damage.ToString());
-                    if (monsterController.DealDamage(playerCharacter.Damage, playerCharacter)) {
-                        Destroy(col.gameObject);
-                    }
+                    int damage = monsterController.DealDamage(playerCharacter.Damage, playerCharacter);
+                    monsterController.AddHitText(damage.ToString());
                 }
             }
             if (c.thisCollider.name == "PlayerHitBox") {
                 if (col.gameObject.tag == "Monster") {
-                    activeCharacter.DealDamage(col.gameObject.GetComponent<MonsterController>().enemyCharacter.Damage, activeCharacter as PlayerCharacter);
+                    MonsterController monsterController = col.gameObject.GetComponent<MonsterController>();
+                    int damage = activeCharacter.DealDamage(monsterController.enemyCharacter.Damage, activeCharacter as PlayerCharacter);
+                    AddHitText(damage.ToString());
                     Debug.Log(playerCharacter.Health);
                 }
                 if (col.gameObject.tag == "Weapon")
                 {
-                    activeCharacter.DealDamage(col.gameObject.GetComponent<Transform>().root.GetComponent<MonsterController>().enemyCharacter.Damage, activeCharacter as PlayerCharacter);
+                    MonsterController monsterController = col.gameObject.GetComponent<Transform>().root.GetComponent<MonsterController>();
+                    int damage = activeCharacter.DealDamage(monsterController.enemyCharacter.Damage, activeCharacter as PlayerCharacter);
+                    AddHitText(damage.ToString());
                     Debug.Log("Hit by Pitchfork");
                 }
             }
@@ -175,6 +189,15 @@ public class PlayerController : MonoBehaviour {
 	{
 		GUI.Label(new Rect(100,100,500,500), "HP:  " + activeCharacter.Health);
 		GUI.Label(new Rect(100,200,500,500),  "Ritual:  " + playerCharacter.GetRitualForm().ToString());
+        foreach (HitText hitText in hitTexts) {
+            hitText.OnGUI();
+        }
+    }
 
-	}
+    public void AddHitText(string text) {
+        HitText hitText = new HitText();
+        hitTexts.Add(hitText);
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
+        hitText.ShowText(text, GameProperties.HITS_TEXT_TIME, screenPos.x, screenPos.y);
+    }
 }
