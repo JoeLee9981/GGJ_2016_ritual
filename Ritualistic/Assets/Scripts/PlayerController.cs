@@ -122,6 +122,11 @@ public class PlayerController : MonoBehaviour {
                     activeCharacter.DealDamage(col.gameObject.GetComponent<MonsterController>().enemyCharacter.Damage, activeCharacter as PlayerCharacter);
                     Debug.Log(playerCharacter.Health);
                 }
+                if (col.gameObject.tag == "Weapon")
+                {
+                    activeCharacter.DealDamage(col.gameObject.GetComponent<Transform>().parent.GetComponent<MonsterController>().enemyCharacter.Damage, activeCharacter as PlayerCharacter);
+                    Debug.Log("Hit by Pitchfork");
+                }
             }
         }
     }

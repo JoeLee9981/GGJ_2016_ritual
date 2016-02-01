@@ -81,10 +81,6 @@ public class MonsterController : MonoBehaviour {
         if (Physics.Raycast(transform.position, rayDirection, out hit, range)) {
             if (hit.collider.gameObject.CompareTag("Player")) {
                 playerCollisionDetected = true;
-                transform.Rotate(Vector3.up * Time.deltaTime * rotationSpeed);
-            }
-            else {
-                playerCollisionDetected = false;
             }
             if (hit.collider.gameObject.CompareTag("Walls")) {
                 collisionDetected = true;
