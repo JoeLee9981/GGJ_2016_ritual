@@ -18,7 +18,7 @@ public class GameProperties {
     public const float DEFAULT_MOVEMENT_SPEED = 3;
     public const float DEFAULT_MOVEMENT_BONUS = 0;
     public const float DEFAULT_SPRINT_BONUS = 0.25f;
-    public const float DEFAULT_ENEMY_SPEED = 2.5f;
+    public const float DEFAULT_ENEMY_SPEED = 2f;
     public const string PLAYER_MESH = "demon_hero";
 
     public const int HITS_TEXT_TIME = 1000;
@@ -45,7 +45,7 @@ public class GameProperties {
     public const float AIR_ARMOR = 0.5f;
     public const int AIR_HEALTH = 400;
     public const int AIR_DAMAGE = 10;
-    public const float AIR_SPEED = 0.3f;
+    public const float AIR_SPEED = 0.0f;
     public const string AIR_MESH = "demon_air";
 
     //default metal armor

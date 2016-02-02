@@ -30,6 +30,7 @@ public class HitText
 
     public void OnGUI() {
         if (Display) {
+            GUI.color = Color.red;
             GUI.Label(new Rect(xPos, yPos, 100, 100), text);
         }
     }
