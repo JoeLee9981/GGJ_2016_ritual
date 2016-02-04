@@ -180,9 +180,10 @@ public class PlayerController : MonoBehaviour {
 
     public void ResetPlayer() {
         transform.position = GameProperties.GetDefaultPlayerVector();
-        playerCharacter.Health = GameProperties.PLAYER_DEFAULT_HEALTH;
+        playerCharacter.Health = playerCharacter.MaxHealth;
         playerCharacter.Armor = GameProperties.PLAYER_DEFAULT_ARMOR;
         playerCharacter.Damage = GameProperties.PLAYER_DEFAULT_DAMAGE;
+        activeCharacter.Health = activeCharacter.MaxHealth;
     }
 
 	void OnGUI()

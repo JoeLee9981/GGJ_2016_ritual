@@ -12,8 +12,7 @@ public class TreasureChestController : MonoBehaviour {
         if(!isOpen)
         {
             GetComponent<Animation>().Play("OpenChest");
-            GameObject playerObject = GameManager.GetInstance().ActivePlayer;
-            PlayerController player = playerObject.GetComponent<PlayerController>();
+            PlayerController player = GameManager.GetInstance().PlayerController;
             player.playerCharacter.AddToInventory(new KeyItem(keyType.ToString(), keyType));
             isOpen = true;
             StartCoroutine(TakeKey());

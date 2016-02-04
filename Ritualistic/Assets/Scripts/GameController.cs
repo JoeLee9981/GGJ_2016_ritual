@@ -3,11 +3,13 @@ using System.Collections;
 
 public class GameController : MonoBehaviour {
 
-    GameManager manager;
+    private GameManager manager;
+    private PlayerController playerController;
 
     // Use this for initialization
     void Start() {
         manager = GameManager.GetInstance();
+        playerController = manager.PlayerController;
     }
 
     // Update is called once per frame
@@ -34,9 +36,7 @@ public class GameController : MonoBehaviour {
     }
 
     private void ResetPlayerCharacter() {
-        if (manager.ActivePlayer != null) {
-            manager.ActivePlayer.GetComponent<PlayerController>().ResetPlayer();
-        }
+        playerController.GetComponent<PlayerController>().ResetPlayer();
     }
 
     private void PauseGame() {

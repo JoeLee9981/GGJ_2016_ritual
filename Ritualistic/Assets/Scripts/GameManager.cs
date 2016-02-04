@@ -4,14 +4,7 @@ using System.Collections;
 public class GameManager {
     private static GameManager gameController;
 
-    private GameObject _activePlayer;
-    public GameObject ActivePlayer {
-        get {
-            if (_activePlayer == null)
-                _activePlayer = GameObject.FindGameObjectWithTag("Player");
-            return _activePlayer;
-        }
-    }
+    public PlayerController PlayerController { get; private set; }
 
     public bool Active;
     public bool Dead;
@@ -25,5 +18,9 @@ public class GameManager {
 
     private GameManager() {
         Active = true;
+        GameObject gameObject = GameObject.FindGameObjectWithTag("Player");
+        if(gameObject != null) {
+            PlayerController = gameObject.GetComponent<PlayerController>();
+        }
     }
 }

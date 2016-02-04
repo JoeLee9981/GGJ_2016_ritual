@@ -7,10 +7,7 @@ public class MainCameraController : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        GameObject playerObject = GameManager.GetInstance().ActivePlayer;
-        if (playerObject != null) {
-            player = playerObject.GetComponent<PlayerController>();
-        }
+        player = GameManager.GetInstance().PlayerController;
     }
 
     // Update is called once per frame

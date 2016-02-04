@@ -28,10 +28,7 @@ public class MonsterController : MonoBehaviour {
         range = 160;
         rotationSpeed = 15f;
 
-        GameObject playerObject = GameManager.GetInstance().ActivePlayer;
-        if (playerObject != null) {
-            playerController = playerObject.GetComponent<PlayerController>();
-        }
+        playerController = GameManager.GetInstance().PlayerController;
 
         hitTexts = new List<HitText>();
     }
@@ -55,8 +52,8 @@ public class MonsterController : MonoBehaviour {
                 //transform.position += GetDirectionVector(transform.position, Waypoints[currentWaypoint].position) * enemyCharacter.MovementSpeed * Time.deltaTime;
             }
             else {
-                if (Vector3.Distance(transform.position, GameManager.GetInstance().ActivePlayer.transform.position) < 7f) {
-                    Vector3 transformVec = GetDirectionVector(transform.position, GameManager.GetInstance().ActivePlayer.transform.position) * enemyCharacter.MovementSpeed * Time.deltaTime;
+                if (Vector3.Distance(transform.position, playerController.transform.position) < 7f) {
+                    Vector3 transformVec = GetDirectionVector(transform.position, playerController.transform.position) * enemyCharacter.MovementSpeed * Time.deltaTime;
                     transformVec.y = 0;
                     transform.position += transformVec;
                     transform.LookAt(playerController.GetComponent<Transform>());

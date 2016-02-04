@@ -13,6 +13,7 @@ public class DoorController : MonoBehaviour
     {
         isOpen = false;
         openPosition = transform.position;
+        player = GameManager.GetInstance().PlayerController;
     }
 
     // Update is called once per frame
@@ -28,14 +29,7 @@ public class DoorController : MonoBehaviour
 
     private bool PlayerHasCorrectKey()
     {
-        GameObject playerObject = GameManager.GetInstance().ActivePlayer;
-        if (playerObject != null)
-        {
-            player = playerObject.GetComponent<PlayerController>();
-            return player.playerCharacter.HasKey(CorrespondingKey);
-        }
-
-        return false;
+        return player.playerCharacter.HasKey(CorrespondingKey);
     }
 
     private void OpenDoor()
